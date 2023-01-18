@@ -3,6 +3,7 @@ package com.example.completeandroidjavaapp.screens;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -16,11 +17,12 @@ import com.example.completeandroidjavaapp.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity
-    implements NavigationView.OnNavigationItemSelectedListener
+implements NavigationView.OnNavigationItemSelectedListener
 {
     ActivityMainBinding binding;
     DrawerLayout drawer;
     ActionBarDrawerToggle actionBarDrawerToggle;
+    Toolbar mainToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,10 @@ public class MainActivity extends AppCompatActivity
         setContentView(binding.getRoot());
 
         drawer = binding.mainDrawer;
+        mainToolbar = binding.mainToolbar;
+
+        /// attach our toolbar as action bar
+        setSupportActionBar(mainToolbar);
 
         /// we attach the current activity to the ActionBar drawer
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawer, R.string.nav_open, R.string.nav_close);
