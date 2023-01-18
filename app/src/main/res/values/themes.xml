@@ -13,5 +13,33 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
 <!--        <item name="android:windowFullscreen">true</item>-->
+<!--        <item name="android:itemTextAppearance">@style/Toolbar.PopupOverlay</item>-->
+
     </style>
+
+    <style name="SpinnerTheme" parent="Theme.MaterialComponents.DayNight">
+<!--        the name of the property comes from the name of the property of the view we want to add
+        like, we wanted to achieve this
+        <TextView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/spinnerItemStyle"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:textAlignment="inherit"
+            android:textSize="15sp"
+            android:textColor="#FF0000"
+            android:padding="5dp"
+            />
+
+        so, we set the android:textColor and android:textSize items
+-->
+        <item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+<!--    <style name="Toolbar.PopupOverlay" parent="Widget.AppCompat.TextView.SpinnerItem">-->
+<!--        <item name="android:textColor">#FFFFFFFF</item>-->
+<!--    </style>-->
 </resources>

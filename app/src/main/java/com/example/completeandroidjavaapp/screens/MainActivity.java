@@ -3,14 +3,22 @@ package com.example.completeandroidjavaapp.screens;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
+import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.example.completeandroidjavaapp.R;
 import com.example.completeandroidjavaapp.databinding.ActivityMainBinding;
@@ -37,6 +45,15 @@ implements NavigationView.OnNavigationItemSelectedListener
         /// attach our toolbar as action bar
         setSupportActionBar(mainToolbar);
 
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        /// if we want to hide title
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle(R.string.welcome);
+
+        /// to set a custom view in the toolbar
+//        getSupportActionBar().setCustomView(R.layout.toolbar_header);
+
+
         /// we attach the current activity to the ActionBar drawer
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawer, R.string.nav_open, R.string.nav_close);
 
@@ -44,10 +61,39 @@ implements NavigationView.OnNavigationItemSelectedListener
         drawer.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
+        /// this changes the drawer logo color
+        actionBarDrawerToggle.getDrawerArrowDrawable().setColor(
+           getResources().getColor(R.color.white)
+        );
+
         /// adding this makes the drawer icon visible
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         addDrawerItemClickListeners();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_dropdown_menu, menu);
+
+        MenuItem item = menu.findItem(R.id.spinner);
+        Spinner spinner = (Spinner) MenuItemCompat.getActionView(item);
+        String[] states = getResources().getStringArray(R.array.states);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, states);
+
+        spinner.setAdapter(adapter);
+
+        /// this is how we change the bg of the dropdown
+        ColorDrawable colorDrawable = new ColorDrawable(0xFFCE9B2C);
+        spinner.setPopupBackgroundDrawable(colorDrawable);
+
+        /// to change the color of the text of the dropdown, we set this theme
+        Resources.Theme spinnerTheme = new ContextThemeWrapper(getApplicationContext(), R.style.SpinnerTheme).getTheme();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            adapter.setDropDownViewTheme(spinnerTheme);
+        }
+        return true;
     }
 
     private void addDrawerItemClickListeners() {

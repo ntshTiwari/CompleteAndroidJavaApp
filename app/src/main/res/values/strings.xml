@@ -3,4 +3,13 @@
 
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
+    <string name="welcome">WELCOME</string>
+
+    <string-array name="states">
+        <item>Jharkhand</item>
+        <item>Karnataka</item>
+        <item>Maharashtra</item>
+        <item>Orissa</item>
+    </string-array>
+
 </resources>
