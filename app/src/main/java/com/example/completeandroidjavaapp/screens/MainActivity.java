@@ -22,7 +22,14 @@ import android.widget.Spinner;
 
 import com.example.completeandroidjavaapp.R;
 import com.example.completeandroidjavaapp.databinding.ActivityMainBinding;
+import com.example.completeandroidjavaapp.models.SliderData;
+import com.example.completeandroidjavaapp.utils.ImageUrls;
+import com.example.completeandroidjavaapp.utils.adapters.SliderAdapter;
 import com.google.android.material.navigation.NavigationView;
+import com.smarteist.autoimageslider.SliderView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity
 implements NavigationView.OnNavigationItemSelectedListener
@@ -70,6 +77,31 @@ implements NavigationView.OnNavigationItemSelectedListener
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         addDrawerItemClickListeners();
+
+        setUpSliderFunctionality();
+    }
+
+    public void setUpSliderFunctionality() {
+        ArrayList<SliderData> sliderData = new ArrayList<SliderData>(
+                Arrays.asList(
+                    new SliderData(ImageUrls.url1),
+                    new SliderData(ImageUrls.url3)
+                )
+        );
+
+        SliderAdapter sliderAdapter = new SliderAdapter(sliderData);
+
+        /// to get id from an include tag, call the id of the include and then the view
+        SliderView sliderView = binding.activityMainBody.slider;
+
+        /// attach the adapter to the slider
+        sliderView.setSliderAdapter(sliderAdapter);
+
+        /// set the properties needed for the slider
+        sliderView.setAutoCycleDirection(SliderView.LAYOUT_DIRECTION_LTR);
+        sliderView.setScrollTimeInSec(sliderData.size());
+        sliderView.setAutoCycle(true);
+        sliderView.startAutoCycle();
     }
 
     @Override
